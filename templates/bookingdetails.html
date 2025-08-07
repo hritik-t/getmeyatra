@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container1">
+    <section class="about" id="about"></section>
+
+    <div class="info-section">
+        <!-- Left: Image & Destination Overview -->
+        <div class="left-column" style="flex: 1;">
+            <div class="slideshow" id="destination-overview" style="display: none;">
+                <img id="destination-image" src="" alt="Tour Image" class="detail-image" />
+                <h2 id="destination-heading"></h2>
+                <p id="destination-description"></p>
+                <p id="destination-details"></p>
+            </div>
+        </div>
+
+        <!-- Right: Booking Form -->
+        <div class="right-column booking-form" style="flex: 1;">
+            <h2>Book This Trip</h2>
+            <form id="tripForm" method="POST" action="{% url 'book_trip' %}">
+                {% csrf_token %}
+
+                <!-- Row 1 -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="from">From:</label>
+                        <input type="text" id="from" name="from" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="to">To:</label>
+                        <input type="text" id="to" name="to" readonly />
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="date">Date:</label>
+                        <input type="text" id="date" name="date" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label for="pickup">Pickup Point:</label>
+                        <select id="pickup" name="pickup" required>
+                            <option value="">-- Select Pickup Point --</option>
+                            <option value="Delhi">Delhi</option>
+                            <option value="Gurgaon">Gurgaon</option>
+                            <option value="Jaipur">Jaipur</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Full Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Your full name" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="your@example.com" required />
+                    </div>
+                </div>
+
+                <!-- Row 4 -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Mobile Number:</label>
+                        <input type="tel" id="phone" name="phone" placeholder="e.g. 9876543210" pattern="[0-9]{10}"
+                            maxlength="10" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="altPhone">Alternate Mobile Number:</label>
+                        <input type="tel" id="altPhone" name="altPhone" placeholder="e.g. 9876543211"
+                            pattern="[0-9]{10}" maxlength="10" required />
+                    </div>
+                </div>
+
+                <!-- Row 5 -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="persons">How Many Persons:</label>
+                        <input type="number" id="persons" name="persons" min="1" placeholder="Number of travelers"
+                            required />
+                    </div>
+                    <div class="form-group">
+                        <label for="price">Price Per Person (INR):</label>
+                        <input type="text" id="price" name="price" value="1999" readonly />
+                    </div>
+                </div>
+
+                <!-- Total Price -->
+                <p id="total-price" style="margin-top: 10px; font-weight: bold;">Total Price: ₹1999</p>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit">Confirm Booking</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ✅ Tabs Section -->
+    <div class="info">
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab active" data-tab="itinerary">Itinerary</button>
+            <button class="tab" data-tab="inclusions">Inclusions</button>
+            <button class="tab" data-tab="exclusions">Exclusions</button>
+            <button class="tab" data-tab="note">Important Note</button>
+            <button class="tab" data-tab="hotel">Hotel Details</button>
+        </div>
+
+        <!-- Tab Contents -->
+        <div id="itinerary" class="tab-content active">
+            <h2>Day 1: Delhi to Agra - A Royal Welcome</h2>
+            <ul>
+                <li>Morning pickup from your desired location in Delhi.</li>
+                <li>Enjoy a scenic drive to Agra via the Yamuna Expressway.</li>
+                <li>Check-in to your comfortable hotel in Agra.</li>
+                <li>Visit Agra Fort, Sadar Bazaar, and Mehtab Bagh.</li>
+                <li>Dinner at your hotel.</li>
+            </ul>
+
+            <hr />
+
+            <h2>Day 2: Taj Mahal & Fatehpur Sikri</h2>
+            <ul>
+                <li>Early morning visit to the Taj Mahal.</li>
+                <li>Drive towards Jaipur.</li>
+                <li>Visit Fatehpur Sikri on the way.</li>
+            </ul>
+        </div>
+
+        <div id="inclusions" class="tab-content">
+            <h2>Inclusions</h2>
+            <ul>
+                <li>✔️ Includes 125 km and 5 hours</li>
+                <li>✔️ Driver Allowance</li>
+                <li>✔️ GST (5%)</li>
+            </ul>
+        </div>
+
+        <div id="exclusions" class="tab-content">
+            <h2>Exclusions</h2>
+            <ul>
+                <li>❌ After 125 km - Pay ₹16.00/km</li>
+                <li>❌ After 7 hr - Pay ₹100.00/hr</li>
+                <li>❌ Tolls, State Tax/Permit charges</li>
+                <li>❌ Parking/Airport Entry Charge</li>
+            </ul>
+        </div>
+
+        <div id="note" class="tab-content">
+            <h2>Important Note</h2>
+            <ul>
+                <li>Carry valid ID proof for hotel check-in.</li>
+                <li>Itinerary may change based on local conditions.</li>
+            </ul>
+        </div>
+
+        <div id="hotel" class="tab-content">
+            <h2>Hotel Details</h2>
+            <ul>
+                <li>Hotel in Agra: 3-star hotel with breakfast</li>
+                <li>Hotel in Jaipur: Heritage-style property</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ✅ JavaScript for Tabs & Destination Logic -->
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+        const params = new URLSearchParams(window.location.search);
+        const from = params.get("from") || "";
+        const to = params.get("to") || "";
+        const date = params.get("date") || "";
+
+        document.getElementById("from").value = from;
+        document.getElementById("to").value = to;
+        document.getElementById("date").value = date;
+
+        const personsInput = document.getElementById("persons");
+        const priceInput = document.getElementById("price");
+        const totalPriceEl = document.getElementById("total-price");
+        personsInput.value = 1;
+
+        function getPricePerPerson(destination) {
+            switch (destination.toLowerCase()) {
+                case "khatu shyamji": return 2000;
+                case "salasar balaji": return 1600;
+                case "ujjain": return 1500;
+                default: return 1999;
+            }
+        }
+
+        function updatePrice() {
+            const destination = to.trim().toLowerCase();
+            const count = parseInt(personsInput.value) || 0;
+            const pricePerPerson = getPricePerPerson(destination);
+            priceInput.value = pricePerPerson;
+            totalPriceEl.textContent = "Total Price: ₹" + (pricePerPerson * count);
+        }
+
+        personsInput.addEventListener("input", updatePrice);
+        updatePrice();
+
+        const destination = to.trim().toLowerCase();
+        const overview = document.getElementById("destination-overview");
+        const image = document.getElementById("destination-image");
+        const heading = document.getElementById("destination-heading");
+        const description = document.getElementById("destination-description");
+        const details = document.getElementById("destination-details");
+
+        if (destination === "khatu shyamji") {
+            overview.style.display = "block";
+            image.src = "{% static 'Images/KhatuShyam1.jpg' %}";
+            heading.textContent = "Khatu Shyam Tour Overview";
+            description.textContent = `Join us on a divine pilgrimage to Khatu Shyamji, Salasar Balaji, and Rani Sati Mandir. 
+        This sacred journey includes transportation, guided darshans, and all meals – breakfast, lunch, and dinner. 
+        Our team ensures your comfort and spiritual fulfillment throughout the tour.`;
+            details.innerHTML = `
+        <strong>Duration:</strong> 2 Days, 1 Night <br/>
+        <strong>Meals:</strong> Included <br/>
+        <strong>Transportation:</strong> AC Cab <br/>
+        <strong>Pickup:</strong> Delhi, Gurgaon, Jaipur <br/>
+    `;
+        } else if (destination === "salasar balaji") {
+            overview.style.display = "block";
+            image.src = "{% static 'Images/SalasarBalaji.jpg' %}";
+            heading.textContent = "Salasar Balaji Tour Overview";
+            description.textContent = `Experience a soul-enriching journey to Salasar Balaji and nearby temples. 
+        This spiritual tour includes comfortable travel, traditional meals, and personal time for darshan and prayers.`;
+            details.innerHTML = `
+        <strong>Duration:</strong> 1 Day <br/>
+        <strong>Meals:</strong> Breakfast & Lunch <br/>
+        <strong>Transportation:</strong> AC Cab <br/>
+        <strong>Pickup:</strong> Delhi, Jaipur <br/>
+    `;
+        } else if (destination === "ujjain") {
+            overview.style.display = "block";
+            image.src = "{% static 'Images/Ujjain-mahakal-image.jpg' %}";
+            heading.textContent = "Ujjain Mahakal Tour Overview";
+            description.textContent = `Embark on a sacred journey to Ujjain, the city of Lord Mahakaleshwar. 
+        Enjoy a peaceful darshan experience with guided tours, temple visits, and meals included.`;
+            details.innerHTML = `
+        <strong>Duration:</strong> 2 Days, 1 Night <br/>
+        <strong>Meals:</strong> Breakfast & Dinner <br/>
+        <strong>Transportation:</strong> Train + AC Cab <br/>
+        <strong>Pickup:</strong> Delhi, Indore <br/>
+    `;
+        }
+
+
+
+        // Tab functionality
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+    });
+</script>
+{% endblock content %}

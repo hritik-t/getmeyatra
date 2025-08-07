@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Section Book Start -->
+<section class="book" id="book">
+  <div class="container">
+    <section class="about" id="about">
+      <div class="main-text">
+        <h1><span>B</span>ook</h1>
+      </div>
+    </section>
+
+    <div class="row">
+
+      <div class="col-md-6 py-3 py-md-0">
+        <div class="card">
+          <img src="{% static 'Images/book-img.png' %}" alt="">
+        </div>
+      </div>
+
+      <div class="col-md-6 py-3 py-md-0">
+        <form action="{% url 'book' %}" method="POST">
+          {% csrf_token %}
+
+          <!-- Destination -->
+          <input type="text" class="form-control" placeholder="Where To Go" name="place" required><br>
+
+          <!-- Number of Persons -->
+          <input type="text" class="form-control" placeholder="How Many" name="person" required><br>
+
+          <!-- Arrival Date -->
+          <label class="form-label" for="">Arrivals</label>
+          <input type="date" class="form-control" name="Adate" required><br>
+
+          <!-- Leaving Date -->
+          <label class="form-label" for="">Leaving</label>
+          <input type="date" class="form-control" name="Ldate" required><br>
+
+          <!-- From Location -->
+          <select class="form-control" name="from" required>
+            <option value="Delhi">From: Delhi</option>
+          </select><br>
+
+          <!-- Pickup Point -->
+          <select class="form-control" name="pickup" required>
+            <option value="">-- Select Pickup Point --</option>
+            <option value="Delhi">Delhi</option>
+            <option value="Gurgaon">Gurgaon</option>
+            <option value="Jaipur">Jaipur</option>
+          </select><br>
+
+          <!-- Fixed Travel Date -->
+          <select class="form-control" name="date" required>
+            <option value="">-- Select Travel Date --</option>
+            <option value="10-08-2025">10-08-2025</option>
+            <option value="15-08-2025">15-08-2025</option>
+            <option value="20-08-2025">20-08-2025</option>
+          </select><br>
+
+          <!-- Full Name -->
+          <input type="text" class="form-control" placeholder="Your Full Name" name="name" required><br>
+
+          <!-- Email -->
+          <input type="email" class="form-control" placeholder="your@example.com" name="email" required><br>
+
+          <!-- Mobile Number -->
+          <input type="tel" class="form-control" placeholder="Mobile Number" name="phone" required><br>
+
+          <!-- Alternate Mobile Number -->
+          <input type="tel" class="form-control" placeholder="Alternate Mobile Number" name="altPhone"><br>
+
+          <!-- Fixed Price Per Person -->
+          <input type="text" class="form-control" value="1999" name="price" readonly><br>
+
+          <!-- Extra Details -->
+          <textarea class="form-control" rows="5" name="text" placeholder="Enter Your Name & Details"></textarea><br>
+
+          <!-- Submit Button -->
+          <input type="submit" value="Book Now" class="submit" required>
+
+        </form>
+      </div>
+
+
+    </div>
+  </div>
+</section>
+<!-- Section Book End -->
+
+{% endblock content %}

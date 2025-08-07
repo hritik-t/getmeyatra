@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- Home Section Start -->
+<!-- Container for background -->
+<div class="form-container">
+    <!-- Booking Dropdown form Section -->
+    <div class="form">
+        <!-- FROM Dropdown -->
+        <div class="dropdown-wrapper">
+            <input type="text" id="fromInput" placeholder="From" readonly onclick="toggleDropdown('fromDropdown')" />
+            <ul id="fromDropdown" class="dropdown hidden">
+                <li onclick="selectFrom('Delhi')">Delhi</li>
+            </ul>
+        </div>
+
+        <!-- TO Dropdown -->
+        <div class="dropdown-wrapper">
+            <input type="text" id="toInput" placeholder="To" readonly onclick="toggleDropdown('toDropdown')" />
+            <ul id="toDropdown" class="dropdown hidden">
+                <li onclick="selectTo('Khatu Shyamji')">Khatu Shyamji</li>
+                <li onclick="selectTo('Salasar Balaji')">Salasar Balaji</li>
+                <li onclick="selectTo('Ujjain')">Ujjain</li>
+            </ul>
+        </div>
+
+        <!-- DATE Dropdown -->
+        <div class="dropdown-wrapper">
+            <input type="text" id="dateInput" placeholder="Date" readonly onclick="toggleDropdown('dateDropdown')" />
+            <ul id="dateDropdown" class="dropdown hidden"></ul>
+        </div>
+
+        <!-- Submit -->
+        <button class="submit">Submit</button>
+    </div>
+</div>
+<!-- Home Section End -->
+
+
+
+<!-- Card Section -->
+<section class="card-section">
+    <h2>Our Top Services</h2>
+    <div class="card-container">
+        <div class="card1">
+            <a href="{% url 'khatushyam' %}">
+                <img src="{% static 'Images/KhatuShyam1.jpg' %}" alt="Khatu Shyam Dham">
+            </a>
+
+            <h3>Khatu Shyam Dham</h3>
+            <p>
+                Embark on a divine journey to Khatu Shyamji, Salasar Balaji, and Rani Sati Mandir with our
+                all-inclusive spiritual tour. Experience the serenity of temples and the power of unwavering
+                devotion. Comfortable travel and soulful experiences await you.
+            </p>
+            <div class="card-buttons">
+                <a href="{% url 'khatushyam' %}" target="_blank" class="btn btn-primary btn-lg w-30">
+                    Book
+                </a>
+            </div>
+        </div>
+
+
+
+        <div class="card1">
+            <a href="{% url 'vrindavan' %}">
+                <img src="{% static 'Images/VridabanImage.jpg' %}" alt="VridabanImage">
+            </a>
+            <h3>Vrindavan Dham</h3>
+            <p>"Experience divine bliss in Vrindavan with visits to Banke Bihari, Nidhivan, ISKCON, Prem Mandir,
+                Yamuna darshan, Chardham Mandir, and Barsana. Relish soulful darshans with included breakfast,
+                lunch, and dinner for a complete spiritual retreat."</p>
+            <div class="card-buttons">
+                <a href="{% url 'vrindavan' %}" target="_blank" class="btn btn-primary btn-lg w-30">
+                    Book
+                </a>
+            </div>
+        </div>
+
+
+
+        <div class="card1">
+            <a href="{% url 'ujjain' %}">
+                <img src="{% static 'Images/Ujjain-mahakal-image.jpg' %}" alt="Ujjain Mahakaal Image">
+            </a>
+            <h3>Ujjain Mahakaal Darshan</h3>
+            <p>"Embark on a 4-day divine journey to Ujjain's Mahakaleshwar, Omkareshwar, Mamleshwar, and Sanwaliya
+                Seth temples. Enjoy sacred darshans with wholesome breakfast, lunch, and dinner included for a
+                spiritually fulfilling experience."</p>
+            <div class="card-buttons">
+                <a href="{% url 'ujjain' %}" target="_blank" class="btn btn-primary btn-lg w-30">
+                    Book
+                </a>
+            </div>
+        </div>
+
+
+
+        <div class="card1">
+            <a href="{% url 'chardham' %}">
+                <img src="{% static 'Images/CharDham.jpg' %}" alt="Chardham Image">
+            </a>
+            <h3>Chardham Yatra</h3>
+            <p>"Experience the divine essence of the Chardham Yatra Yamunotri, Gangotri, Kedarnath & Badrinath
+                on a 12-day sacred pilgrimage. Discover spiritual bliss amidst the Himalayas with guided visits and
+                serene temple darshans."</p>
+            <div class="card-buttons">
+                <a href="{% url 'chardham' %}" target="_blank" class="btn btn-primary btn-lg w-30">
+                    Book
+                </a>
+            </div>
+        </div>
+
+
+
+        <div class="card1">
+            <a href="{% url 'dodham' %}">
+                <img src="{% static 'Images/DoDham.jpeg' %}" alt="DoDham Image">
+            </a>
+            <h3>Do Dham Yatra</h3>
+            <p>"Begin your sacred Do Dham Yatra to Kedarnath and Badrinath, the twin abodes of Lord Shiva and
+                Vishnu. A soul-enriching journey through the serene Himalayas with divine temple darshans and
+                peaceful surroundings."</p>
+
+            <div class="card-buttons">
+                <a href="{% url 'dodham' %}" target="_blank" class="btn btn-primary btn-lg w-30">
+                    Book
+                </a>
+            </div>
+        </div>
+
+
+
+        <div class="card1">
+            <a href="{% url 'ekdham' %}">
+                <img src="{% static 'Images/ekDham.jpeg' %}" alt="Ek Dham Image">
+            </a>
+            <h3>Ek Dham Yatra</h3>
+            <p>"Experience spiritual bliss on a divine journey to Kedarnath Dham/Badrinath dham, nestled in the
+                majestic Himalayas. Seek blessings of Lord Shiva in one of India's most sacred pilgrimage sites."
+            </p>
+            <div class="card-buttons">
+                <a href="{% url 'ekdham' %}" target="_blank" class="btn btn-primary btn-lg w-30">
+                    Book
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Intro Section -->
+<section class="intro">
+    <h1>Welcome to GetMe<span>Yatra</span></h1>
+    <p>Your trusted cab partner for all travel needs! Whether you're planning a weekend trip, a business tour, or a
+        wedding ride — we're here with reliable drivers and clean vehicles.</p>
+</section>
+
+<!-- Why Choose Us -->
+<section class="why">
+    <h2>Why Choose GetMe<span>Yatra</span>?</h2>
+    <div class="features">
+        <div>
+            <h3>✔ Professional Drivers</h3>
+            <p>Trained, verified and punctual.</p>
+        </div>
+        <div>
+            <h3>✔ Affordable Packages</h3>
+            <p>Transparent pricing with no hidden costs.</p>
+        </div>
+        <div>
+            <h3>✔ 24/7 Support</h3>
+            <p>We're just a call away—anytime, anywhere.</p>
+        </div>
+    </div>
+</section>
+
+<section class="testimonial-carousel">
+    <div class="container">
+        <h2 class="text-center mb-5" style="color: #ffd700;">What Our Devotees Say</h2>
+
+        <div id="testimonialSlider" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                    <div class="testimonial-quote mx-auto" style="max-width: 700px;">
+                        “The Khatu Shyam Ji and Salasar Balaji yatra was truly divine. The arrangements, food, and
+                        darshan were excellent!”
+                        <div class="testimonial-name mt-3">Anita Sharma</div>
+                        <div class="testimonial-location">Delhi</div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="testimonial-quote mx-auto" style="max-width: 700px;">
+                        “I felt the divine presence in Vrindavan and Mahakal Darshan was unforgettable. Great
+                        hospitality!”
+                        <div class="testimonial-name mt-3">Rakesh Gupta</div>
+                        <div class="testimonial-location">Kanpur</div>
+                    </div>
+                </div>
+
+                <div class="carousel-item">
+                    <div class="testimonial-quote mx-auto" style="max-width: 700px;">
+                        “Very organized tour. Clean hotels, timely darshan, and excellent prasad meals throughout.”
+                        <div class="testimonial-name mt-3">Seema Verma</div>
+                        <div class="testimonial-location">Jaipur</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialSlider"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+
+            <button class="carousel-control-next" type="button" data-bs-target="#testimonialSlider"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+
+        </div>
+    </div>
+</section>
+
+<script>
+    function handleSubmit() {
+        const from = document.getElementById('fromInput').value;
+        const to = document.getElementById('toInput').value;
+        let date = document.getElementById('dateInput').value;
+
+        if (!from || !to || !date) {
+            alert("Please fill all fields before submitting.");
+            return;
+        }
+
+        const queryString = `?from=${encodeURIComponent(from)}&to=${encodeURIComponent(to)}&date=${encodeURIComponent(date)}`;
+        window.location.href = `/bookdetails/${queryString}`;
+    }
+
+    // Attach submit handler
+    document.querySelector('.submit').addEventListener('click', handleSubmit);
+
+</script>
+
+
+{% endblock content %}

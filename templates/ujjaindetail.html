@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="about" id="about">
+    <div class="container1">
+        <div class="info-section">
+            <!-- Left: Image -->
+            <div class="left-column" style="flex: 1;">
+                <img src="{% static 'Images/Ujjain-mahakal-image.jpg' %}" alt="Ujjain Mahakaal" class="detail-image" />
+                <h2>Ujjain Mahakaal Tour Overview</h2>
+                <p>
+                    Embark on a spiritually enriching 4-day journey to the sacred city of Ujjain. Witness the powerful
+                    darshan of
+                    Shri Mahakaleshwar Jyotirlinga, followed by visits to Omkareshwar, Mamleshwar, and Sanwaliya Seth
+                    temples. This
+                    all-inclusive tour offers you peaceful worship, spiritual insights, and complete comfort throughout.
+                </p>
+
+                <p>
+                    <strong>Duration:</strong> 4 Days, 3 Nights <br />
+                    <strong>Meals:</strong> Breakfast, Lunch, and Dinner included <br />
+                    <strong>Transportation:</strong> AC Cab or Bus (Private/Shared) <br />
+                    <strong>Pickup:</strong> Delhi, Indore, Bhopal <br />
+                </p>
+            </div>
+
+            <!-- Right: Booking Form -->
+            <div class="right-column booking-form" style="flex: 1;">
+                <h2>Book This Trip</h2>
+                <form id="tripForm" method="POST" action="{% url 'book_trip' %}">
+                    {% csrf_token %}
+                    <!-- Row 1 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="from">From:</label>
+                            <input type="text" id="from" name="from" value="Delhi" readonly />
+                        </div>
+                        <div class="form-group">
+                            <label for="to">To:</label>
+                            <input type="text" id="to" name="to" value="Ujjain Mahakaal" readonly />
+                        </div>
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Date:</label>
+                            <select id="date" name="date" required>
+                                <option value="">-- Select Date --</option>
+                                <option value="10-08-2025">10-08-2025</option>
+                                <option value="15-08-2025">15-08-2025</option>
+                                <option value="20-08-2025">20-08-2025</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="pickup">Pickup Point:</label>
+                            <select id="pickup" name="pickup" required>
+                                <option value="">-- Select Pickup Point --</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Indore">Indore</option>
+                                <option value="Bhopal">Bhopal</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Row 3 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name:</label>
+                            <input type="text" id="name" name="name" placeholder="Your full name" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" placeholder="your@example.com" required />
+                        </div>
+                    </div>
+
+                    <!-- Row 4 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Mobile Number:</label>
+                            <input type="tel" id="phone" name="phone" placeholder="e.g. 9876543210" pattern="[0-9]{10}"
+                                maxlength="10" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="altPhone">Alternate Mobile Number:</label>
+                            <input type="tel" id="altPhone" name="altPhone" placeholder="e.g. 9876543211"
+                                pattern="[0-9]{10}" maxlength="10" required />
+                        </div>
+                    </div>
+
+                    <!-- Row 5 -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="persons">How Many Persons:</label>
+                            <input type="number" id="persons" name="persons" min="1" placeholder="Number of travelers"
+                                required />
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price Per Person (INR):</label>
+                            <input type="text" id="price" name="price" value="1999" readonly />
+                        </div>
+                    </div>
+
+                    <!-- Total Price -->
+                    <p id="total-price" style="margin-top: 10px; font-weight: bold;">Total Price: ₹1999</p>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="info">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-tab="itinerary">Itinerary</button>
+                <button class="tab" data-tab="inclusions">Inclusions</button>
+                <button class="tab" data-tab="exclusions">Exclusions</button>
+                <button class="tab" data-tab="note">Important Note</button>
+                <button class="tab" data-tab="hotel">Hotel Details</button>
+            </div>
+
+            <!-- Tab Contents -->
+            <div id="itinerary" class="tab-content active">
+                <h2>Day 1: Delhi to Agra - A Royal Welcome</h2>
+                <ul>
+                    <li>Morning pickup from your desired location in Delhi.</li>
+                    <li>Enjoy a scenic drive to Agra via the Yamuna Expressway.</li>
+                    <li>Check-in to your comfortable hotel in Agra.</li>
+                    <li>Afternoon: Visit the majestic Agra Fort, a UNESCO World Heritage Site, and delve into the
+                        history of Mughal emperors.</li>
+                    <li>Evening: Explore the vibrant Sadar Bazaar, indulge in local delicacies like Agra's famous
+                        "Pethas," and witness the enchanting sunset from Mehtab Bagh overlooking the Taj Mahal.</li>
+                    <li>Enjoy a delicious dinner at your hotel.</li>
+                </ul>
+
+                <hr />
+
+                <h2>Day 2: Taj Mahal & Fatehpur Sikri - A Day of Wonders</h2>
+                <ul>
+                    <li>Early morning: Witness the ethereal beauty of the Taj Mahal, a masterpiece of Mughal
+                        architecture.</li>
+                    <li>After the Taj Mahal, drive towards Jaipur.</li>
+                    <li>En route: Visit the magnificent Fatehpur Sikri, a deserted Mughal city with stunning
+                        architecture, including the Buland Darwaza, Jama Masjid, and Panch Mahal.</li>
+                </ul>
+            </div>
+
+            <div id="inclusions" class="tab-content">
+                <h2>Inclusions</h2>
+                <ul>
+                    <li>✔️ Includes 125 km and 5 hours</li>
+                    <li>✔️ Driver Allowance</li>
+                    <li>✔️ GST (5%)</li>
+                </ul>
+            </div>
+
+            <div id="exclusions" class="tab-content">
+                <h2>Exclusions</h2>
+                <ul>
+                    <li>❌ After 125 km - Pay ₹ 16.00/km</li>
+                    <li>❌ After 7 hr - Pay ₹ 100.00/hr</li>
+                    <li>❌ Tolls, State Tax/Permit charges</li>
+                    <li>❌ Parking/Airport Entry Charge</li>
+                </ul>
+            </div>
+
+            <div id="note" class="tab-content">
+                <h2>Important Note</h2>
+                <ul>
+                    <li>Please carry valid ID proof for hotel check-in.</li>
+                    <li>Itinerary may change based on local conditions or unforeseen events.</li>
+                </ul>
+            </div>
+
+            <div id="hotel" class="tab-content">
+                <h2>Hotel Details</h2>
+                <ul>
+                    <li>Hotel in Agra: 3-star hotel with complimentary breakfast</li>
+                    <li>Hotel in Jaipur: Heritage-style property with city view</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <!-- JS for Total Price Calculation -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const personsInput = document.getElementById('persons');
+            const totalPriceText = document.getElementById('total-price');
+            const pricePerPerson = 1999;
+
+            personsInput.addEventListener('input', function () {
+                const count = parseInt(this.value) || 1;
+                const total = count * pricePerPerson;
+                totalPriceText.textContent = 'Total Price: ₹' + total.toLocaleString('en-IN');
+            });
+        });
+    </script>
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                tab.classList.add('active');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+    </script>
+</section>
+{% endblock content %}

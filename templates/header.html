@@ -1,0 +1,1060 @@
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JourneyQuest</title>
+
+  <link rel="stylesheet" href="{% static 'CSS/style0.css' %}">
+
+  <!-- Bootstrap Link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- Bootstrap Link -->
+
+
+  <!-- Font Awesome Cdn -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+  <!-- Font Awesome Cdn -->
+
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <style>
+    .nav-item .nav-link.active {
+      color: rgb(7, 179, 164);
+    }
+
+    .logo {
+      width: 70px;
+      float: left;
+      margin-right: 10px;
+    }
+
+    /* Global Reset */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body */
+    body {
+      font-family: 'Poppins', sans-serif;
+      padding-top: 2px;
+      background-color: #fff;
+      color: #000;
+      overflow-x: hidden;
+    }
+
+    /* Booking dropdown form CSS */
+    .form-container {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background-image: url("{% static 'Images/Shyambaba.jpg' %}");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .form {
+      width: 100%;
+      max-width: 800px;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      display: flex;
+      gap: 15px;
+      flex-wrap: nowrap;
+      box-sizing: border-box;
+    }
+
+    .dropdown-wrapper {
+      position: relative;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    input[readonly] {
+      width: 100%;
+      padding: 10px;
+      font-size: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 6px;
+      background-color: rgba(255, 255, 255, 0.85);
+      cursor: pointer;
+      color: #000;
+      box-sizing: border-box;
+    }
+
+    input[readonly]::placeholder {
+      color: #666;
+    }
+
+    .dropdown {
+      list-style: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      margin-top: 6px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      max-height: 180px;
+      overflow-y: auto;
+      z-index: 9999;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .dropdown li {
+      padding: 10px;
+      font-size: 14px;
+      cursor: pointer;
+      color: #222;
+      transition: background-color 0.2s ease-in-out;
+    }
+
+    .dropdown li:hover {
+      background-color: #ffe600;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .submit {
+      width: 20%;
+      padding: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-color: rgb(236, 195, 61);
+      color: white;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      height: 42px;
+    }
+
+    .submit:hover {
+      background-color: #ffe600;
+      color: black;
+    }
+
+    /* Responsive: Tablet */
+    @media (max-width: 768px) {
+      .form {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .dropdown-wrapper,
+      .submit {
+        width: 100%;
+      }
+
+      input[readonly],
+      .submit {
+        font-size: 14px;
+        padding: 10px;
+        height: 40px;
+      }
+
+      .dropdown li {
+        font-size: 14px;
+      }
+    }
+
+    /* Responsive: Small Mobile Devices */
+    @media (max-width: 480px) {
+      .form {
+        padding: 15px;
+      }
+
+      input[readonly],
+      .submit {
+        font-size: 13px;
+        padding: 6px 10px;
+        height: 45px;
+      }
+
+      .dropdown li {
+        padding: 10px;
+      }
+    }
+
+    /* Extra Small Screens */
+    @media (max-width: 320px) {
+
+      input[readonly],
+      .submit {
+        font-size: 12px;
+        padding: 5px 8px;
+        height: 32px;
+      }
+    }
+
+    /* Intro Section */
+    .intro {
+      text-align: center;
+      padding: 40px 20px;
+      background: #000;
+      color: #fff;
+    }
+
+    .intro span {
+      color: #f5c400;
+    }
+
+    /* Why Section */
+    .why {
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    .why span {
+      color: #f5c400;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .features div {
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      max-width: 250px;
+    }
+
+    /* Card Section */
+    .card-section {
+      padding: 40px 20px;
+      background-color: #f9f9f9;
+      text-align: center;
+    }
+
+    .card-section h2 {
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 150px;
+      justify-content: center;
+    }
+
+    .card1 {
+      width: 100%;
+      max-width: 320px;
+      background: #e9e6e6;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      min-height: 430px;
+      transition: transform 0.3s;
+    }
+
+    .card1:hover {
+      transform: translateY(-5px);
+    }
+
+    .card1 img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .card1 h3 {
+      font-size: 18px;
+      color: #f5c400;
+      text-align: center;
+      margin: 15px 0 10px;
+    }
+
+    .card1 p {
+      font-size: 14px;
+      color: #555;
+      margin: 0 15px 20px;
+      text-align: center;
+    }
+
+    .card-buttons {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      margin: 15px 0 20px;
+    }
+
+    .card-btn,
+    .detail-btn {
+      padding: 8px 10px;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      transition: 0.3s ease;
+      width: 30%;
+    }
+
+    .card-btn {
+      background-color: #28a745;
+      color: white;
+    }
+
+    .card-btn:hover {
+      background-color: #218838;
+    }
+
+    .detail-btn {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .detail-btn:hover {
+      background-color: #0056b3;
+    }
+
+    /* Carousel CSS */
+    .testimonial-carousel {
+      background-color: #111;
+      padding: 60px 20px;
+      border-top: 5px solid #ffd700;
+    }
+
+    .carousel-item {
+      text-align: center;
+    }
+
+    .testimonial-quote {
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .testimonial-quote::before {
+      content: "❝";
+      font-size: 3rem;
+      color: #ffd700;
+      position: absolute;
+      top: -20px;
+      left: -20px;
+    }
+
+    .testimonial-name {
+      font-weight: bold;
+      color: #ffd700;
+      font-size: 1.1rem;
+    }
+
+    .testimonial-location {
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+
+    /* Footer Css */
+    .footer {
+      background-color: #000;
+      color: #fff;
+      padding: 40px 20px;
+      font-size: 14px;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .footer-brand .logo {
+      font-size: 28px;
+      font-weight: 800;
+      color: #fff;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .footer-brand .logo span {
+      color: #f5c400;
+    }
+
+    .footer-brand .tagline {
+      margin-top: 4px;
+      font-size: 16px;
+      color: #ccc;
+      line-height: 1.5;
+    }
+
+
+    .footer-icons a {
+      color: #f8f3f3;
+      text-decoration: none;
+    }
+
+    .footer-icons a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-icons span {
+      display: inline-block;
+      padding: 8px;
+      border-radius: 50%;
+      margin-right: 10px;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+
+
+    .footer-columns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      flex: 3;
+    }
+
+    .footer-col {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .footer-col h4 {
+      color: #fff;
+      font-size: 16px;
+      margin-bottom: 10px;
+      border-bottom: 2px solid #f5c400;
+      display: inline-block;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+
+    .footer-col ul li:hover {
+      color: #f5c400;
+    }
+
+    /* Small-device tweaks (excluding header/menu-toggle/cta-buttons) */
+    @media (max-width: 480px) {
+      .booking .form {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .booking input,
+      .booking .submit {
+        width: 100%;
+        max-width: none;
+      }
+
+      .card-container {
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .card {
+        max-width: 100%;
+        min-height: auto;
+      }
+
+      .intro h1,
+      .why h2 {
+        font-size: 1.6rem;
+      }
+
+      .intro p,
+      .why p,
+      .features div p {
+        font-size: 0.9rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+      }
+
+      .footer-col,
+      .footer-brand {
+        width: 100%;
+      }
+    }
+
+    @media (min-width: 480px) and (max-width: 767px) {
+      .booking .form {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .booking input,
+      .booking .submit {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .footer-container,
+      .footer-columns {
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      .footer-col {
+        width: 100%;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .features div {
+        max-width: 200px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .footer-columns {
+        flex-wrap: nowrap;
+      }
+
+      .footer-col {
+        min-width: 200px;
+      }
+    }
+  </style>
+  <style>
+    .container1 {
+      max-width: 1000px;
+      margin: auto;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    .detail-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    form label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+    }
+
+    form input,
+    form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+
+    .info {
+      margin-top: 20px;
+    }
+
+    .info h2 {
+      margin-bottom: 10px;
+    }
+
+    .info p {
+      line-height: 1.6;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: #007bff;
+      color: white;
+      padding: 10px 16px;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+      .detail-image {
+        max-height: 250px;
+      }
+
+      .info h2 {
+        font-size: 20px;
+      }
+
+      .info p {
+        font-size: 15px;
+      }
+    }
+
+    .info-section {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .tabs {
+      display: flex;
+      flex-wrap: nowrap;
+      /* Default: no wrap for desktop */
+      overflow-x: auto;
+      gap: 10px;
+      border-bottom: 3px solid #e0e0e0;
+      margin: 20px 0;
+      padding: 0 10px;
+      max-width: 100vw;
+      scrollbar-width: none;
+      /* Firefox */
+      -ms-overflow-style: none;
+      /* IE */
+    }
+
+    .tabs::-webkit-scrollbar {
+      display: none;
+      /* Chrome/Safari/Edge */
+    }
+
+    /* Individual Tab Buttons */
+    .tab {
+      flex: 0 0 auto;
+      padding: 8px 12px;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      background-color: #f8f8f8;
+      border-radius: 5px 5px 0 0;
+      cursor: pointer;
+      color: #333;
+      white-space: nowrap;
+      transition: background-color 0.3s ease;
+    }
+
+    .tab:hover {
+      background-color: #f0f0f0;
+    }
+
+    .tab.active {
+      background-color: #ffd700;
+      color: #000;
+    }
+
+    /* Tab Content */
+    .tab-content {
+      display: none;
+      background: #fff;
+      padding: 20px;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      animation: fadeIn 0.3s ease-in-out;
+      max-width: 100%;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* Fade Animation */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Tab Content Styling */
+    .tab-content h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #111;
+    }
+
+    .tab-content ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .tab-content li {
+      margin-bottom: 10px;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    hr {
+      margin: 25px 0;
+      border: none;
+      border-top: 1px solid #ccc;
+    }
+
+    /* ---------- Responsive Enhancements ---------- */
+
+    @media (max-width: 768px) {
+      .tabs {
+        flex-wrap: wrap;
+        /* ✅ Allow wrapping */
+        overflow-x: unset;
+        /* ✅ Remove horizontal scroll */
+        justify-content: flex-start;
+      }
+
+      .tab {
+        font-size: 14px;
+        padding: 10px 16px;
+        white-space: normal;
+        /* ✅ Allow text to wrap if needed */
+      }
+
+      .tab-content {
+        padding: 16px;
+      }
+
+      .tab-content h2 {
+        font-size: 17px;
+      }
+
+      .tab-content li {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tab {
+        font-size: 13px;
+        padding: 10px 14px;
+      }
+
+      .tab-content {
+        padding: 14px;
+      }
+
+      .tab-content h2 {
+        font-size: 16px;
+      }
+
+      .tab-content li {
+        font-size: 13px;
+      }
+    }
+
+    .info-section {
+      display: flex;
+      gap: 30px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .left-column {
+      flex: 1;
+      min-width: 300px;
+      padding: 20px;
+    }
+
+    .left-column h2 {
+      text-align: center;
+      margin: 10px;
+    }
+
+    
+
+    .right-column {
+      flex: 1;
+      min-width: 280px;
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .booking-form h2 {
+      margin-bottom: 15px;
+    }
+
+    .booking-form label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .booking-form input {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .booking-form .submit {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: #ffd700;
+      border: none;
+      font-weight: bold;
+      color: #000;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .booking-form .submit:hover {
+      background: #f0c000;
+    }
+
+    @media (max-width: 768px) {
+      .info-section {
+        flex-direction: column;
+      }
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 15px;
+    }
+
+    .form-group {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #tripForm {
+      max-width: 800px;
+      margin: auto;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    input,
+    select,
+    textarea {
+      padding: 8px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg fixed-top shadow" id="navbar">
+    <div class="container">
+      <img class="logo" src="{% static 'Images/logo1.png' %}" alt="">
+      <a class="navbar-brand" href="{% url 'home' %}" id="logo">GetMe<span>Yatra</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+        <span><i class="fa-solid fa-bars"></i></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav me-auto ms-auto">
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/homePage/' %}active{% endif %}" href="{% url 'home' %}">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/book/' %}active{% endif %}" href="{% url 'book' %}">Book</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/package/' %}active{% endif %}"
+              href="{% url 'package' %}">Packages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/service/' %}active{% endif %}"
+              href="{% url 'service' %}">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/gallery/' %}active{% endif %}"
+              href="{% url 'gallery' %}">Gallary</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {% if request.path == '/aboutUs/' %}active{% endif %}"
+              href="{% url 'aboutUs' %}">About</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="tel:+918965945602" title="Call Now">
+              <i class="fa-solid fa-phone" style="padding: 3px; color: rgb(128, 39, 13);"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="openWhatsAppChat(); return false;" title="Chat on WhatsApp">
+              <i class="fab fa-whatsapp" style="padding: 3px; color: rgb(39, 138, 0);"></i>
+            </a>
+          </li> -->
+
+        </ul>
+        <form class="d-flex">
+          <!-- <a href="{% url 'home' %}" class="btn btn-primary">Log Out</a> -->
+          <li class="nav-item">
+            <a class="nav-link" href="tel:+918965945602" title="Call Now">
+              <i class="fa-solid fa-phone" style="padding: 3px; color: rgb(128, 39, 13);"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="openWhatsAppChat(); return false;" title="Chat on WhatsApp">
+              <i class="fab fa-whatsapp" style="padding: 3px; color: rgb(39, 138, 0);"></i>
+            </a>
+          </li>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <!-- Navbar End -->
+
+  <script>
+    // WhatsApp chat directly
+    function openWhatsAppChat() {
+      const message = "Hi, I'm interested in booking a cab";
+      const phone = "918965945602"; // Add country code without + sign
+      const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const baseURL = isMobile
+        ? "https://api.whatsapp.com/send"
+        : "https://web.whatsapp.com/send";
+
+      const whatsappURL = `${baseURL}?phone=${phone}&text=${encodeURIComponent(message)}`;
+      window.open(whatsappURL, "_blank");
+    }
+
+
+
+
+
+    // Dropdown options by destination
+    const dateOptions = {
+      "Khatu Shyamji": ["01-08-2025", "05-08-2025", "10-08-2025"],
+      "Salasar Balaji": ["03-08-2025", "07-08-2025", "15-08-2025"],
+      "Ujjain": ["02-08-2025", "06-08-2025", "12-08-2025"]
+    };
+
+
+    function toggleDropdown(id) {
+      document.querySelectorAll(".dropdown").forEach(drop => drop.classList.add("hidden"));
+      const dropdown = document.getElementById(id);
+      if (dropdown) dropdown.classList.toggle("hidden");
+    }
+
+    function selectFrom(location) {
+      document.getElementById("fromInput").value = location;
+      document.getElementById("fromDropdown").classList.add("hidden");
+    }
+
+    function selectTo(location) {
+      document.getElementById("toInput").value = location;
+      document.getElementById("toDropdown").classList.add("hidden");
+
+      const dateDropdown = document.getElementById("dateDropdown");
+      dateDropdown.innerHTML = "";
+
+      const dates = dateOptions[location] || [];
+      dates.forEach(date => {
+        const li = document.createElement("li");
+        li.textContent = date;
+        li.onclick = () => selectDate(date);
+        dateDropdown.appendChild(li);
+      });
+
+      document.getElementById("dateInput").value = "";
+    }
+
+    function selectDate(date) {
+      document.getElementById("dateInput").value = date;
+      document.getElementById("dateDropdown").classList.add("hidden");
+    }
+
+
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest(".dropdown-wrapper")) {
+        document.querySelectorAll(".dropdown").forEach(drop => drop.classList.add("hidden"));
+      }
+    });
+
+
+
+
+
+    // WhatsApp redirect function (mobile or desktop)
+    function sendToWhatsApp(phone, message) {
+      const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const baseURL = isMobile
+        ? "https://api.whatsapp.com/send"
+        : "https://web.whatsapp.com/send";
+      const url = `${baseURL}?phone=${phone}&text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    }
+
+    // Submit handler
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelector(".submit").addEventListener("click", function () {
+        const from = document.getElementById("fromInput").value;
+        const to = document.getElementById("toInput").value;
+        const date = document.getElementById("dateInput").value;
+
+        if (!from || !to || !date) {
+          alert("Please select From, To, and Date before submitting.");
+          return;
+        }
+
+        const message = `Booking Details:\nFrom: ${from}\nTo: ${to}\nDate: ${date}`;
+        const phone = "+918965945602";
+
+        sendToWhatsApp(phone, message);
+      });
+    });
+  </script>

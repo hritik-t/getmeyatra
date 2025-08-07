@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+   <!-- Section Gallary Start -->
+   <section class="gallary" id="gallary">
+    <div class="container">
+
+      <section class="about" id="about">
+      <div class="main-txt">
+        <h1><span>G</span>allary</h1>
+      </div>
+      </section>
+
+      <div class="row" style="margin-top: 30px;">
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'Images/g1.png' %}" alt="" height="230px">
+          </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'Images/g2.png' %}" alt="" height="230px">
+          </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'Images/g3.png' %}" alt="" height="230px">
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row" style="margin-top: 30px;">
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'Images/g4.png' %}" alt="" height="230px">
+          </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'Images/g5.png' %}" alt="" height="230px">
+          </div>
+        </div>
+        <div class="col-md-4 py-3 py-md-0">
+          <div class="card">
+            <img src="{% static 'Images/g6.png' %}" alt="" height="230px">
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- Section Gallary End -->
+
+{% endblock content %}

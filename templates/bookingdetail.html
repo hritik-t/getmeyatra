@@ -1,0 +1,551 @@
+<!-- khatu-details.html -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khatu Shyam Dham Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .detail-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .info {
+            margin-top: 20px;
+        }
+
+        .info h2 {
+            margin-bottom: 10px;
+        }
+
+        .info p {
+            line-height: 1.6;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            background: #007bff;
+            color: white;
+            padding: 10px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .detail-image {
+                max-height: 250px;
+            }
+
+            .info h2 {
+                font-size: 20px;
+            }
+
+            .info p {
+                font-size: 15px;
+            }
+        }
+
+        .info-section {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: nowrap;
+            /* Default: no wrap for desktop */
+            overflow-x: auto;
+            gap: 10px;
+            border-bottom: 3px solid #e0e0e0;
+            margin: 20px 0;
+            padding: 0 10px;
+            max-width: 100vw;
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE */
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
+            /* Chrome/Safari/Edge */
+        }
+
+        /* Individual Tab Buttons */
+        .tab {
+            flex: 0 0 auto;
+            padding: 8px 12px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            background-color: #f8f8f8;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
+            color: #333;
+            white-space: nowrap;
+            transition: background-color 0.3s ease;
+        }
+
+        .tab:hover {
+            background-color: #f0f0f0;
+        }
+
+        .tab.active {
+            background-color: #ffd700;
+            color: #000;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            background: #fff;
+            padding: 20px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            animation: fadeIn 0.3s ease-in-out;
+            max-width: 100%;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Fade Animation */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tab Content Styling */
+        .tab-content h2 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #111;
+        }
+
+        .tab-content ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        .tab-content li {
+            margin-bottom: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        hr {
+            margin: 25px 0;
+            border: none;
+            border-top: 1px solid #ccc;
+        }
+
+        /* ---------- Responsive Enhancements ---------- */
+
+        @media (max-width: 768px) {
+            .tabs {
+                flex-wrap: wrap;
+                /* ✅ Allow wrapping */
+                overflow-x: unset;
+                /* ✅ Remove horizontal scroll */
+                justify-content: flex-start;
+            }
+
+            .tab {
+                font-size: 14px;
+                padding: 10px 16px;
+                white-space: normal;
+                /* ✅ Allow text to wrap if needed */
+            }
+
+            .tab-content {
+                padding: 16px;
+            }
+
+            .tab-content h2 {
+                font-size: 17px;
+            }
+
+            .tab-content li {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tab {
+                font-size: 13px;
+                padding: 10px 14px;
+            }
+
+            .tab-content {
+                padding: 14px;
+            }
+
+            .tab-content h2 {
+                font-size: 16px;
+            }
+
+            .tab-content li {
+                font-size: 13px;
+            }
+        }
+
+        .info-section {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .left-column {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .right-column {
+            flex: 1;
+            min-width: 280px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .booking-form h2 {
+            margin-bottom: 15px;
+        }
+
+        .booking-form label {
+            display: block;
+            margin-top: 10px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .booking-form input {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background: #fff;
+        }
+
+        .booking-form .submit {
+            width: 100%;
+            margin-top: 20px;
+            padding: 12px;
+            background: #ffd700;
+            border: none;
+            font-weight: bold;
+            color: #000;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+        }
+
+        .booking-form .submit:hover {
+            background: #f0c000;
+        }
+
+        @media (max-width: 768px) {
+            .info-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            GetMe<span>Yatra</span>
+        </a>
+        <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+        <nav class="cta-buttons">
+            <button class="phone" onclick="window.location.href='tel:+918965945602'">📞</button>
+
+            <button class="whatsapp" onclick="openWhatsAppChat()">
+                <img src="image/Wimage.jpg" height="16" width="16" alt="WhatsApp" />
+                Chat on WhatsApp
+            </button>
+        </nav>
+
+    </header>
+
+    <div class="container">
+        <img src="image/KhatuShyam1.jpg" alt="Khatu Shyam Dham" class="detail-image" />
+        <div class="info-section">
+            <!-- Left: Image -->
+            <div class="left-column" style="flex: 1;">
+                <img src="image/KhatuShyam1.jpg" alt="Khatu Shyam Dham" class="detail-image" />
+            </div>
+
+            <!-- Right: Booking Form -->
+            <div class="right-column booking-form" style="flex: 1;">
+                <h2>Book This Trip</h2>
+                <form id="tripForm">
+                    <label for="from">From:</label>
+                    <input type="text" id="from" name="from" readonly />
+
+                    <label for="to">To:</label>
+                    <input type="text" id="to" name="to" readonly />
+
+                    <label for="date">Date:</label>
+                    <input type="text" id="date" name="date" readonly />
+
+                    <button type="submit" class="submit">Confirm Booking</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="info">
+            <h2>Khatu Shyam Tour Overview</h2>
+            <p>
+                Join us on a divine pilgrimage to Khatu Shyamji, Salasar Balaji, and Rani Sati Mandir. This sacred
+                journey
+                includes
+                transportation, guided darshans, and all meals – breakfast, lunch, and dinner.
+                Our team ensures your comfort and spiritual fulfillment throughout the tour.
+            </p>
+
+            <p>
+                <strong>Duration:</strong> 2 Days, 1 Night <br />
+                <strong>Meals:</strong> Included <br />
+                <strong>Transportation:</strong> AC Cab (Private/Shared) <br />
+                <strong>Pickup:</strong> Delhi, Gurgaon, Jaipur <br />
+            </p>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" data-tab="itinerary">Itinerary</button>
+                <button class="tab" data-tab="inclusions">Inclusions</button>
+                <button class="tab" data-tab="exclusions">Exclusions</button>
+                <button class="tab" data-tab="note">Important Note</button>
+                <button class="tab" data-tab="hotel">Hotel Details</button>
+            </div>
+
+            <!-- Tab Contents -->
+            <div id="itinerary" class="tab-content active">
+                <h2>Day 1: Delhi to Agra - A Royal Welcome</h2>
+                <ul>
+                    <li>Morning pickup from your desired location in Delhi.</li>
+                    <li>Enjoy a scenic drive to Agra via the Yamuna Expressway.</li>
+                    <li>Check-in to your comfortable hotel in Agra.</li>
+                    <li>Afternoon: Visit the majestic Agra Fort, a UNESCO World Heritage Site, and delve into the
+                        history of
+                        Mughal emperors.</li>
+                    <li>Evening: Explore the vibrant Sadar Bazaar, indulge in local delicacies like Agra's famous
+                        "Pethas," and
+                        witness the enchanting sunset from Mehtab Bagh overlooking the Taj Mahal.</li>
+                    <li>Enjoy a delicious dinner at your hotel.</li>
+                </ul>
+
+                <hr />
+
+                <h2>Day 2: Taj Mahal & Fatehpur Sikri - A Day of Wonders</h2>
+                <ul>
+                    <li>Early morning: Witness the ethereal beauty of the Taj Mahal, a masterpiece of Mughal
+                        architecture.</li>
+                    <li>After the Taj Mahal, drive towards Jaipur.</li>
+                    <li>En route: Visit the magnificent Fatehpur Sikri, a deserted Mughal city with stunning
+                        architecture,
+                        including the Buland Darwaza, Jama Masjid, and Panch Mahal.</li>
+                </ul>
+            </div>
+
+            <div id="inclusions" class="tab-content">
+                <h2>Inclusions</h2>
+                <ul>
+                    <li>✔️ Includes 125 km and 5 hours</li>
+                    <li>✔️ Driver Allowance</li>
+                    <li>✔️ GST (5%)</li>
+                </ul>
+            </div>
+
+            <div id="exclusions" class="tab-content">
+                <h2>Exclusions</h2>
+                <ul>
+                    <li>❌ After 125 km - Pay ₹ 16.00/km</li>
+                    <li>❌ After 7 hr - Pay ₹ 100.00/hr</li>
+                    <li>❌ Tolls, State Tax/Permit charges</li>
+                    <li>❌ Parking/Airport Entry Charge</li>
+                </ul>
+            </div>
+
+            <div id="note" class="tab-content">
+                <h2>Important Note</h2>
+                <ul>
+                    <li>Please carry valid ID proof for hotel check-in.</li>
+                    <li>Itinerary may change based on local conditions or unforeseen events.</li>
+                </ul>
+            </div>
+
+            <div id="hotel" class="tab-content">
+                <h2>Hotel Details</h2>
+                <ul>
+                    <li>Hotel in Agra: 3-star hotel with complimentary breakfast</li>
+                    <li>Hotel in Jaipur: Heritage-style property with city view</li>
+                </ul>
+            </div>
+
+            <a href="index.html" class="back-btn">← Back to Packages</a>
+        </div>
+    </div>
+
+    <!-- Footer  -->
+    <footer class="footer">
+        <div class="footer-container">
+
+            <div class="footer-brand">
+                <div class="logo">GetMe<span>Yatra</span></div>
+                <p class="tagline">Yatra made simple!</p>
+
+                <div class="footer-icons">
+                    <div>📞 Phone: <a href="tel:+919312113322">+91 9312113322</a></div>
+
+                    <div>✉️ Email: <a href="mailto:info@getmecab.com">info@getmecab.com</a></div>
+
+                    <div>📍 Location:<br>
+                        B-26, Rajeev Nagar, Near Radhey Krishna Mandir Begumpur, New Delhi-110086. Opp. Rohini Sec-22
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-columns">
+                <div class="footer-col">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li>One Way Taxi</li>
+                        <li>City Taxi</li>
+                        <li>Taxi Package</li>
+                        <li>Holiday Package</li>
+                        <li>Airport Transfers</li>
+                        <li>Cars For Wedding</li>
+                        <li>Pilgrims Yatra</li>
+                        <li>Round Way Taxi Service</li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li>Press Release</li>
+                        <li>Career</li>
+                        <li>Privacy Policy</li>
+                        <li>Offers</li>
+                        <li>Blog</li>
+                        <li>Corona Precaution</li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Support Center</h4>
+                    <ul>
+                        <li>About Us</li>
+                        <li>Contact Us</li>
+                        <li>FAQ's</li>
+                        <li>Terms of Service</li>
+                        <li>Booking & Cancellation</li>
+                        <li>Have Complaints?</li>
+                        <li>Lowest Price Guarantee</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        // Toggle Menu
+        function toggleMenu() {
+            const nav = document.querySelector('.cta-buttons');
+            nav.classList.toggle('active');
+        }
+
+
+
+
+
+        // WhatsApp chat directly
+        function openWhatsAppChat() {
+            const message = "Hi, I'm interested in booking a cab";
+            const phone = "918965945602"; // Add country code without + sign
+            const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            const baseURL = isMobile
+                ? "https://api.whatsapp.com/send"
+                : "https://web.whatsapp.com/send";
+
+            const whatsappURL = `${baseURL}?phone=${phone}&text=${encodeURIComponent(message)}`;
+            window.open(whatsappURL, "_blank");
+        }
+
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                tab.classList.add('active');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+    </script>
+    <script>
+        // Read query params and prefill the form
+        const params = new URLSearchParams(window.location.search);
+
+        document.getElementById('from').value = params.get('from') || '';
+        document.getElementById('to').value = params.get('to') || '';
+        document.getElementById('date').value = params.get('date') || '';
+
+        // Handle form submission (just a placeholder)
+        document.getElementById('tripForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Booking confirmed!');
+        });
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    {% if status == "Success" %}
+    <h2 class="text-success">Payment Successful!</h2>
+    <p>Thank you {{ booking.full_name }} for booking your trip from {{ booking.from_location }} to {{
+        booking.to_location }} on {{ booking.date }}.</p>
+    {% else %}
+    <h2 class="text-danger">Payment Failed!</h2>
+    <p>Sorry, your payment was not successful. Please try again.</p>
+    {% endif %}
+    <a href="{% url 'home' %}" class="btn btn-primary mt-3">Book Another Trip</a>
+</div>
+{% endblock content %}

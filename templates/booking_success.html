@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+        <div class="alert alert-success text-center">
+            <section class="about" id="about">
+                <h2>Booking Confirmed!</h2>
+            </section>
+            <p>Thank you for booking your trip with us.</p>
+            <a href="{% url 'home' %}" class="btn btn-primary mt-3">Book Another Trip</a>
+        </div>
+    </div>
+{% endblock content %}
