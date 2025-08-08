@@ -1,0 +1,31 @@
+{% extends "admin/base_site.html" %}
+{% block content %}
+  <table border="1" cellpadding="10" style="text-align: center;">
+    <thead">
+      <tr style="background-color: #cfcccc; font-weight: bold; font-size: 16px; color: black;">
+        <th>Date</th>
+        <th>To Location</th>
+        <th>Total Seats</th>
+        <th>Total Persons Booked</th>
+        <th>Remaining Seats</th>
+        <th>View Bookings</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in bookings %}
+        <tr>
+          <td><a href="{% url 'admin:GetMeYatraApp_tripbooking_changelist' %}?date__exact={{ item.date|date:'Y-m-d' }}&to_location__exact={{ item.to_location }}">{{ item.date|date:'d-m-Y' }}</a></td>
+          <td>{{ item.to_location }}</td>
+          <td>52</td>
+          <td>{{ item.total_booked }}</td> 
+          <td>{{ item.remaining }}</td>
+          <td>
+            <a href="{% url 'admin:GetMeYatraApp_tripbooking_changelist' %}?date__exact={{ item.date|date:'Y-m-d' }}&to_location__exact={{ item.to_location }}">
+              View Bookings
+            </a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

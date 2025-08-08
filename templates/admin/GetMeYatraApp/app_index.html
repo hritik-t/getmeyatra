@@ -1,0 +1,19 @@
+{% extends "admin/app_index.html" %}
+
+{% block content %}
+{{ block.super }}
+<div style="margin-top: 20px;">
+  <a class="button" href="{% url 'admin:date-wise-bookings' %}"
+    style="display: inline-block; background: #0c4b33; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none;">
+    📅 View Date-wise Bookings
+  </a>
+</div>
+<div style="margin-top: 20px;">
+  <a class="button" href="{% url 'admin:location-date-summary' %}"
+    style="display: inline-block; background: #0c4b33; color: white; padding: 8px 12px; border-radius: 5px; text-decoration: none;">
+    🧭 Destination-wise Bookings
+  </a>
+</div>
+
+
+{% endblock %}

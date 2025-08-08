@@ -54,6 +54,11 @@
       overflow-x: hidden;
     }
 
+
+    #logo span{
+      color: #ffee00;
+    }
+
     /* Booking dropdown form CSS */
     .form-container {
       position: relative;
@@ -899,7 +904,10 @@
   <!-- Navbar Start -->
   <nav class="navbar navbar-expand-lg fixed-top shadow" id="navbar">
     <div class="container">
-      <img class="logo" src="{% static 'Images/logo1.png' %}" alt="">
+      <a href="{% url 'home' %}">
+  <img class="logo" src="{% static 'Images/logo4.png' %}" alt="">
+</a>
+
       <a class="navbar-brand" href="{% url 'home' %}" id="logo">GetMe<span>Yatra</span></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
         <span><i class="fa-solid fa-bars"></i></span>

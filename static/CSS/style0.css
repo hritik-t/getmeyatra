@@ -21,15 +21,16 @@
     text-shadow: 0px 1px 1px black;
     margin-bottom: 5px;
 }
-#logo span{
-    color: #ffa500;
-}
+
+
+
 .navbar-toggler span{
-    color: #ffa500;
+    color: #ffee00;
 }
 .navbar-nav{
     margin-left: 20px;
 }
+
 
 .nav-item .nav-link{
     font-size: 16px;
