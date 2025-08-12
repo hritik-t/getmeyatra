@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="about" id="about">
+  <div class="container1">
+    <div class="info-section">
+      <!-- Left: Image & Overview -->
+      <div class="left-column" style="flex: 1;">
+        <img src="{{ package.image.url }}" alt="{{ package.name }}" class="detail-image" />
+        <h2>{{ package.name }} Tour Overview</h2>
+        <p>{{ package.full_description|safe }}</p>
+
+        <p>
+          <strong>Duration:</strong> {{ package.duration }} <br />
+          <strong>Meals:</strong> {{ package.meals }} <br />
+          <strong>Transportation:</strong> {{ package.transportation }} <br />
+          <strong>Pickup:</strong> {{ package.pickup_points }} <br />
+        </p>
+      </div>
+
+      <!-- Right: Booking Form -->
+      <div class="right-column booking-form" style="flex: 1;">
+        <h2>Book This Trip</h2>
+        <form id="tripForm" method="POST" action="{% url 'book_trip' %}">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group">
+              <label for="from">From:</label>
+              <input type="text" id="from" name="from" value="Delhi" readonly />
+            </div>
+            <div class="form-group">
+              <label for="to">To:</label>
+              <input type="text" id="to" name="to" value="{{ package.name }}" readonly />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="date">Date:</label>
+              <input type="date" id="date" name="date" required />
+            </div>
+            <div class="form-group">
+              <label for="pickup">Pickup Point:</label>
+              <select id="pickup" name="pickup" required>
+                <option value="">-- Select Pickup Point --</option>
+                {% for point in pickup_points %}
+                <option value="{{ point }}">{{ point }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full Name:</label>
+              <input type="text" id="name" name="name" placeholder="Your full name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" placeholder="your@example.com" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="phone">Mobile Number:</label>
+              <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" maxlength="10" required />
+            </div>
+            <div class="form-group">
+              <label for="altPhone">Alternate Mobile:</label>
+              <input type="tel" id="altPhone" name="altPhone" pattern="[0-9]{10}" maxlength="10" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="persons">How Many Persons:</label>
+              <input type="number" id="persons" name="persons" min="1" required />
+            </div>
+            <div class="form-group">
+              <label for="price">Price Per Person (INR):</label>
+              <input type="text" id="price" name="price" value="{{ package.price_per_person }}" readonly />
+            </div>
+          </div>
+
+          <p id="total-price">Total Price: ₹{{ package.price_per_person }}</p>
+          <button type="submit" class="submit">Confirm Booking</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="info">
+      <div class="tabs">
+        <button class="tab active" data-tab="itinerary">Itinerary</button>
+        <button class="tab" data-tab="inclusions">Inclusions</button>
+        <button class="tab" data-tab="exclusions">Exclusions</button>
+        <button class="tab" data-tab="note">Important Note</button>
+        <button class="tab" data-tab="hotel">Hotel Details</button>
+      </div>
+
+      <div id="itinerary" class="tab-content active">
+        {{ package.itinerary|safe }}
+      </div>
+
+      <div id="inclusions" class="tab-content">
+        {{ package.inclusions|safe }}
+      </div>
+
+      <div id="exclusions" class="tab-content">
+        {{ package.exclusions|safe }}
+      </div>
+
+      <div id="note" class="tab-content">
+        {{ package.important_note|safe }}
+      </div>
+
+      <div id="hotel" class="tab-content">
+        {{ package.hotel_details|safe }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Price Calculation JS -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const personsInput = document.getElementById('persons');
+      const totalPriceText = document.getElementById('total-price');
+      const pricePerPerson = parseFloat("{{ package.price_per_person }}");
+
+      personsInput.addEventListener('input', function () {
+        const count = parseInt(this.value) || 1;
+        const total = count * pricePerPerson;
+        totalPriceText.textContent = 'Total Price: ₹' + total.toLocaleString('en-IN');
+      });
+    });
+
+    // Tabs
+    const tabs = document.querySelectorAll('.tab');
+    const contents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const target = tab.dataset.tab;
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(target).classList.add('active');
+      });
+    });
+  </script>
+</section>
+{% endblock content %}

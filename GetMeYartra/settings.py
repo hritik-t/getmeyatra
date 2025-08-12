@@ -128,10 +128,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -140,6 +145,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # CCAvenue settings
-CCAV_MERCHANT_ID = 'sandbox_merchant_id'
-CCAV_ACCESS_CODE = 'sandbox_access_code'
-CCAV_WORKING_KEY = 'sandbox_working_key'
+CCAV_MERCHANT_ID = '123456'
+CCAV_ACCESS_CODE = 'AVDF00XX00AB12FDF'
+CCAV_WORKING_KEY = 'A1B2C3D4E5F60708'

@@ -8,6 +8,7 @@
 <div class="form-container">
     <!-- Booking Dropdown form Section -->
     <div class="form">
+        {% csrf_token %}
         <!-- FROM Dropdown -->
         <div class="dropdown-wrapper">
             <input type="text" id="fromInput" placeholder="From" readonly onclick="toggleDropdown('fromDropdown')" />
@@ -44,29 +45,29 @@
 <section class="card-section">
     <h2>Our Top Services</h2>
     <div class="card-container">
-        <div class="card1">
-            <a href="{% url 'khatushyam' %}">
-                <img src="{% static 'Images/KhatuShyam1.jpg' %}" alt="Khatu Shyam Dham">
-            </a>
-
-            <h3>Khatu Shyam Dham</h3>
-            <p>
-                Embark on a divine journey to Khatu Shyamji, Salasar Balaji, and Rani Sati Mandir with our
-                all-inclusive spiritual tour. Experience the serenity of temples and the power of unwavering
-                devotion. Comfortable travel and soulful experiences await you.
-            </p>
-            <div class="card-buttons">
-                <a href="{% url 'khatushyam' %}" target="_blank" class="btn btn-primary btn-lg w-30">
-                    Book
+        <div class="packages-container">
+            {% for package in packages %}
+            <div class="card1">
+                <a href="{% url 'tour_detail' package.slug %}">
+                    <img src="{{ package.image.url }}" alt="{{ package.name }}">
                 </a>
+                <h3>{{ package.name }}</h3>
+                <p>{{ package.description|truncatechars:200 }}</p>
+                <div class="card-buttons">
+                    <a href="{% url 'tour_detail' package.slug %}" class="btn btn-primary btn-lg w-30">
+                        Book
+                    </a>
+                </div>
             </div>
+            {% endfor %}
         </div>
+
 
 
 
         <div class="card1">
             <a href="{% url 'vrindavan' %}">
-                <img src="{% static 'Images/VridabanImage.jpg' %}" alt="VridabanImage">
+                <img src="{% static 'images/VridabanImage.jpg' %}" alt="VridabanImage">
             </a>
             <h3>Vrindavan Dham</h3>
             <p>"Experience divine bliss in Vrindavan with visits to Banke Bihari, Nidhivan, ISKCON, Prem Mandir,
@@ -83,7 +84,7 @@
 
         <div class="card1">
             <a href="{% url 'ujjain' %}">
-                <img src="{% static 'Images/Ujjain-mahakal-image.jpg' %}" alt="Ujjain Mahakaal Image">
+                <img src="{% static 'images/Ujjain-mahakal-image.jpg' %}" alt="Ujjain Mahakaal Image">
             </a>
             <h3>Ujjain Mahakaal Darshan</h3>
             <p>"Embark on a 4-day divine journey to Ujjain's Mahakaleshwar, Omkareshwar, Mamleshwar, and Sanwaliya
@@ -100,7 +101,7 @@
 
         <div class="card1">
             <a href="{% url 'chardham' %}">
-                <img src="{% static 'Images/CharDham.jpg' %}" alt="Chardham Image">
+                <img src="{% static 'images/CharDham.jpg' %}" alt="Chardham Image">
             </a>
             <h3>Chardham Yatra</h3>
             <p>"Experience the divine essence of the Chardham Yatra Yamunotri, Gangotri, Kedarnath & Badrinath
@@ -117,7 +118,7 @@
 
         <div class="card1">
             <a href="{% url 'dodham' %}">
-                <img src="{% static 'Images/DoDham.jpeg' %}" alt="DoDham Image">
+                <img src="{% static 'images/DoDham.jpeg' %}" alt="DoDham Image">
             </a>
             <h3>Do Dham Yatra</h3>
             <p>"Begin your sacred Do Dham Yatra to Kedarnath and Badrinath, the twin abodes of Lord Shiva and
@@ -135,7 +136,7 @@
 
         <div class="card1">
             <a href="{% url 'ekdham' %}">
-                <img src="{% static 'Images/EkDham.jpeg' %}" alt="Ek Dham Image">
+                <img src="{% static 'images/EkDham.jpeg' %}" alt="Ek Dham Image">
             </a>
             <h3>Ek Dham Yatra</h3>
             <p>"Experience spiritual bliss on a divine journey to Kedarnath Dham/Badrinath dham, nestled in the

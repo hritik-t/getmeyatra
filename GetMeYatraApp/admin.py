@@ -2,8 +2,17 @@ from django.contrib import admin
 from django.urls import path
 from django.template.response import TemplateResponse
 from django.db.models import Sum
-from .models import TripBooking
+from .models import TripBooking, TourPackage
 from collections import defaultdict
+
+
+
+@admin.register(TourPackage)
+class TourPackageAdmin(admin.ModelAdmin):
+    list_display = ('name', 'duration', 'price_per_person')
+    prepopulated_fields = {'slug': ('name',)}  # Auto-generate slug from name
+    search_fields = ('name', 'description', 'full_description')
+    list_filter = ('duration',)
 
 class TripBookingAdmin(admin.ModelAdmin):
     list_display = (

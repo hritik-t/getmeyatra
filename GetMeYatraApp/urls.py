@@ -21,12 +21,13 @@ from .views import *
 from . import views
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('', views.home, name='home'),
+    path('tour/<slug:slug>/', views.tour_detail, name='tour_detail'),  # Dynamic detail page
     path('login/', loginpage, name='login'),
     path('signUp/', SignUp, name='signup'),
     path('bookdetails/', bookdetails, name='bookdetails'),
     # path('homePage/', homePage, name='homePage'),
-    path('book/', book, name='book'),
+    # path('book/', book, name='book'),
     path('aboutUs/', aboutUs, name='aboutUs'),
     path('gallery/', gallery, name='gallery'),
     path('service/', service, name='service'),
@@ -41,3 +42,6 @@ urlpatterns = [
     path('booking-success/', views.booking_success, name='booking_success'),
     path('payment-response/', views.payment_response, name='payment_response'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
